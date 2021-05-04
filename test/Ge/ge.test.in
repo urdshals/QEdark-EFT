@@ -1,0 +1,38 @@
+&control
+    calculation= 'scf'
+    restart_mode= 'from_scratch'
+    prefix='qe'
+    tstress= .false.
+    tprnfor= .false.
+    pseudo_dir= './'
+    outdir= './'
+    max_seconds=20000000
+ /
+ &system
+    ibrav= 2 
+    celldm(1)= 10.8171069
+    nat= 2
+    ntyp= 1
+    ecutwfc= 20.0
+    nbnd= 18
+        lda_plus_u=.true.
+        Hubbard_U(1)=9.45
+    nosym= .true.
+    noinv=.true.
+ /
+ &electrons
+    diagonalization= 'david'
+    mixing_mode= 'plain'
+    mixing_beta= 0.7
+    conv_thr= 1.0d-4
+    diago_full_acc= .true.
+/
+ATOMIC_SPECIES
+ Ge  72.630 Ge.pbe-dn-rrkjus_psl.0.2.2.UPF
+ATOMIC_POSITIONS
+ Ge 0.00 0.00 0.00
+ Ge 0.25 0.25 0.25
+
+K_POINTS (automatic)
+ 3 3 3 0 0 0
+
