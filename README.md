@@ -68,7 +68,7 @@ For questions, bug reports or other suggestions please contact Einar Urdshals (u
 <details><summary>License</summary>
 <p>
 
-This project is licensed under the MIT License - see the LICENSE file.
+This project is licensed under the [GNU License](http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt) - see the LICENSE file.
 
 </p>
 </details>
