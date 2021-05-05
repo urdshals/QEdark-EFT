@@ -61,7 +61,7 @@ If you decide to use this code, please cite the latest archived version and the 
 <details><summary>Author & Contact</summary>
 <p>
 
-The author of QEdark-EFT is Einar Urdshals.
+The author of QEdark-EFT is Einar Urdshals and Marek Matas.
 
 For questions, bug reports or other suggestions please contact Einar Urdshals (urdshals@chalmers.se).
 </p>
