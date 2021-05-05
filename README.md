@@ -34,7 +34,7 @@ The included folders are:
 <p>
 
 1. Download and unzip [QuantumESPRESSO v.5.1.2](https://github.com/QEF/q-e/releases/tag/qe-5.1.2)
-2. Copy the files in in *QEdark-EFT/* into the QuantumESPRESSO directory. Some of the files will replace files that are already there with the same name.
+2. Copy the files in *QEdark-EFT/* into the QuantumESPRESSO directory. Some of the files will replace files that are already there with the same name.
 3. While in the QuantumESPRESSO main directory execute ``` make clean ```, then ``` ./configure --disable-parallel --enable-openmp ```, then ``` make pw ```. The first two commands are just needed the first time the code is installed, the latter is needed every time you have made changes to one of the files in the QuantumESPRESSO directory.
 </p>
 </details>
