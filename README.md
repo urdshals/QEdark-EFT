@@ -8,7 +8,7 @@ As described in this publication, QEdark-EFT extends the calculation of the crys
 
 - In the paper we show that any nonrelativistic dark matter electron interaction in Silicon and Germanium can be expressed in terms of 5 products of dark matter and crystal responses. 
 - These crystal responses are expressed in terms of electron wave-function overlap integrals, which are evaluated by QEdark-EFT using the DFT tools from QuantumESPRESSO.
-- The code written in FORTRAN90 and uses [openMP](https://www.openmp.org) for parallelisation.
+- The code is written in FORTRAN90 and uses [openMP](https://www.openmp.org) for parallelisation. For running the code GCC and openMP has been used.
 
 <details><summary>Repository content</summary>
 <p>
