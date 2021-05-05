@@ -1,8 +1,11 @@
 [![License: GPL 
 v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![arXiv](https://img.shields.io/badge/arXiv-2105.xxxxx-B31B1B.svg)](https://arxiv.org/abs/2105.xxxxx)
+<!-- [![DOI](https://zenodo.org/badge/XXXXXXX.svg)](https://zenodo.org/badge/latestdoi/XXXXXXX) -->
+
 # QEdark-EFT
 
-QEdark-EFT is an extention of the [QEdark code](https://github.com/adrian-soto/QEdark_repo) previously used by [Essig et. al.](https://arxiv.org/abs/1509.01598) to [calculate the crystal form factor](http://ddldm.physics.sunysb.edu/ddlDM/). Both QEdark-EFT and QEdark run on [QuantumESPRESSO](https://www.quantum-espresso.org), and requires [QuantumESPRESSO v.5.1.2](https://github.com/QEF/q-e/releases/tag/qe-5.1.2) to run [1](https://iopscience.iop.org/article/10.1088/0953-8984/21/39/395502) [2](https://aip.scitation.org/doi/10.1063/5.0005082).
+QEdark-EFT is an extention of the [QEdark code](https://github.com/adrian-soto/QEdark_repo) previously used by [Essig et. al.](https://arxiv.org/abs/1509.01598) to [calculate the crystal form factor](http://ddldm.physics.sunysb.edu/ddlDM/). Both QEdark-EFT and QEdark run on [QuantumESPRESSO](https://www.quantum-espresso.org), and requires [QuantumESPRESSO v.5.1.2](https://github.com/QEF/q-e/releases/tag/qe-5.1.2) to run [[1]](https://iopscience.iop.org/article/10.1088/0953-8984/21/39/395502) [[2]](https://aip.scitation.org/doi/10.1063/5.0005082).
 
 As described in this publication, QEdark-EFT extends the calculation of the crystal form factor to calculate crystal responses required to calculate the excitation rate in Silicon and Germanium caused by general nonrelativistic dark matter.
 
@@ -48,12 +51,18 @@ The included folders are:
 
 - 04.05.2021: Release of version 0.1.0
 
-## Authorship and Lisnece
+## Authorship and License
 
 <details><summary>Citation</summary>
 <p>
 
 If you decide to use this code, please cite the latest archived version and the paper.
+
+> Urdshals, E., Matas, M, 2021, QEdark-EFT, [[DOI:10.5281/zenodo.xxxxxx]](https://doi.org/10.5281/zenodo.xxxxxx)
+
+as well as the original publications,
+
+> Catena, R., Emken, T., Matas, M, Spaldin, N.A., Urdshals, E. , 2021,  **Crystal responses to general dark matter-electron interactions**, [[arXiv:2105.xxxxx]](https://arxiv.org/abs/2105.xxxxx).
 
 </p>
 </details>
@@ -70,7 +79,7 @@ For questions, bug reports or other suggestions please contact Einar Urdshals (u
 <details><summary>License</summary>
 <p>
 
-This project is licensed under the [GNU License](http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt) - see the LICENSE file.
+This project is licensed under the [GPL License](http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt) - see the LICENSE file.
 
 </p>
 </details>
