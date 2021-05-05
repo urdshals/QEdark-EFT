@@ -1,3 +1,5 @@
+[![License: GPL 
+v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 # QEdark-EFT
 
 QEdark-EFT is an extention of the [QEdark code](https://github.com/adrian-soto/QEdark_repo) previously used by [Essig et. al.](https://arxiv.org/abs/1509.01598) to [calculate the crystal form factor](http://ddldm.physics.sunysb.edu/ddlDM/). Both QEdark-EFT and QEdark run on [QuantumESPRESSO](https://www.quantum-espresso.org), and requires [QuantumESPRESSO v.5.1.2](https://github.com/QEF/q-e/releases/tag/qe-5.1.2) to run [1](https://iopscience.iop.org/article/10.1088/0953-8984/21/39/395502) [2](https://aip.scitation.org/doi/10.1063/5.0005082).
