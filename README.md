@@ -1,6 +1,6 @@
 [![License: GPL 
 v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
-[![arXiv](https://img.shields.io/badge/arXiv-2105.xxxxx-B31B1B.svg)](https://arxiv.org/abs/2105.xxxxx)
+[![arXiv](https://img.shields.io/badge/arXiv-2105.02233-B31B1B.svg)](https://arxiv.org/abs/2105.02233)
 [![DOI](https://zenodo.org/badge/364301231.svg)](https://zenodo.org/badge/latestdoi/364301231)
 
 # QEdark-EFT
