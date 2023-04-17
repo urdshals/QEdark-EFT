@@ -1,29 +1,26 @@
 # Makefile for PW
 
-include ../../make.sys
+include ../../make.inc
 
 # location of needed modules and included files (if any)
-MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules
-IFLAGS=
+MODFLAGS= $(BASEMOD_FLAGS) \
+          $(MOD_FLAG)../../dft-d3/
 
 PWOBJS = \
 pwscf.o 
-
-MANYPWOBJS = \
-manypw.o 
 
 PWLIBS = \
 a2fmod.o \
 add_bfield.o \
 add_efield.o \
 add_vuspsi.o \
+add_gatefield.o \
 add_paw_to_deeq.o \
 add_vhub_to_deeq.o \
 addusdens.o \
 addusforce.o \
 addusstress.o \
 allocate_fft.o \
-allocate_fft_custom.o \
 allocate_locpot.o \
 allocate_nlpot.o \
 allocate_wfc.o \
@@ -42,10 +39,7 @@ buffers.o \
 c_bands.o \
 c_phase_field.o \
 orbm_kubo.o \
-ccgdiagg.o \
 cdiagh.o \
-cdiaghg.o \
-cegterg.o \
 clean_pw.o \
 close_files.o \
 compute_becsum.o \
@@ -56,17 +50,17 @@ compute_qdipol.o \
 compute_qdipol_so.o \
 compute_ux.o \
 coset.o \
+Coul_cut_2D.o \
 d_matrix.o \
 data_structure.o \
-data_structure_custom.o \
 deriv_drhoc.o \
 divide_class.o \
 divide_class_so.o \
-realus.o \
-divide.o \
 divide_et_impera.o \
 dqvan2.o \
 drhoc.o \
+rotate_wfc.o \
+run_driver.o \
 dvloc_of_g.o \
 dynamics_module.o \
 efermig.o \
@@ -76,7 +70,11 @@ eqvect.o \
 esm.o \
 ewald.o \
 ewald_dipole.o \
+extfield.o \
+exx_base.o \
+exx_band.o \
 exx.o \
+fcp.o \
 find_group.o \
 forces_bp_efield.o \
 force_cc.o \
@@ -97,9 +95,9 @@ gk_sort.o \
 gradcorr.o \
 gweights.o \
 g2_kin.o \
+hs_1psi.o \
 h_epsi_her_apply.o \
 h_epsi_her_set.o \
-h_1psi.o \
 h_psi.o \
 h_psi_meta.o \
 hinit0.o \
@@ -107,12 +105,13 @@ hinit1.o \
 init_ns.o \
 init_q_aeps.o \
 init_run.o \
+init_us_0.o \
+init_us_b0.o \
 init_us_1.o \
 init_us_2.o \
 init_at_1.o \
 init_vloc.o \
 input.o \
-interpolate.o \
 io_rho_xml.o \
 irrek.o \
 iweights.o \
@@ -122,6 +121,7 @@ lchk_tauxk.o \
 ldaU.o \
 make_pointlists.o \
 makov_payne.o \
+manypw.o \
 martyna_tuckerman.o \
 memory_report.o \
 mix_rho.o \
@@ -131,7 +131,6 @@ n_plane_waves.o \
 new_ns.o \
 new_occ.o \
 ns_adj.o \
-nonloccorr.o \
 non_scf.o \
 offset_atom_wfc.o \
 openfil.o \
@@ -150,6 +149,7 @@ plugin_init_cell.o \
 plugin_init_potential.o \
 plugin_initbase.o \
 plugin_clean.o \
+plugin_check.o \
 plugin_clock.o \
 plugin_summary.o \
 plugin_initialization.o \
@@ -161,25 +161,22 @@ potinit.o \
 print_clock_pw.o \
 print_ks_energies.o \
 punch.o \
-pw_restart.o \
+pw_restart_new.o \
+add_qexsd_step.o \
+pw_init_qexsd_input.o \
 pwcom.o \
 pw2blip.o \
 pw2casino.o \
 pw2casino_write.o \
 qvan2.o \
-rcgdiagg.o \
 rdiagh.o \
-rdiaghg.o \
 read_conf_from_file.o \
-read_file.o \
-regterg.o \
+read_file_new.o \
+realus.o \
 remove_atomic_rho.o \
 report_mag.o \
 restart_in_electrons.o \
 rho2zeta.o \
-rotate_wfc.o \
-rotate_wfc_k.o \
-rotate_wfc_gamma.o \
 ruotaijk.o \
 run_pwscf.o \
 s_1psi.o \
@@ -187,13 +184,14 @@ s_psi.o \
 save_in_cbands.o \
 save_in_electrons.o \
 scale_h.o \
+loc_scdm.o \
+loc_scdm_k.o \
 scf_mod.o \
 set_kplusq.o \
 set_kup_and_kdw.o \
 set_rhoc.o \
 set_vrs.o \
 setlocal.o \
-setqf.o \
 setup.o \
 spinor.o \
 sph_ind.o \
@@ -207,6 +205,7 @@ stres_knl.o \
 stres_loc.o \
 stres_us.o \
 stres_nonloc_dft.o \
+stres_mgga.o \
 stress.o \
 struct_fact.o \
 sum_band.o \
@@ -217,11 +216,11 @@ symme.o \
 symm_base.o \
 symmetrize_at.o \
 tabd.o \
+tetra.o \
 transform_becsum_so.o \
 transform_becsum_nc.o \
 transform_qq_so.o \
 trnvecc.o \
-tweights.o \
 update_pot.o \
 us_exx.o \
 usnldiag.o \
@@ -231,8 +230,8 @@ vcsubs.o \
 vhpsi.o \
 vloc_of_g.o \
 vloc_psi.o \
+utils.o \
 xdm_dispersion.o \
-xk_wk_collect.o \
 wfcinit.o \
 write_ns.o \
 wsweight.o \
@@ -244,31 +243,27 @@ wannier_check.o \
 wannier_clean.o \
 wannier_occ.o \
 wannier_enrg.o \
-wyckoff.o \
 qedark.o \
 qedark_routines.o \
 qedark_f2.o \
-qedark_f2_3d.o\
 qedark_multimass.o \
+qedark_f2_3d.o \
 qedark_read_input.o
 
-QEMODS=../../Modules/libqemod.a
+QEMODS=../../Modules/libqemod.a \
+       ../../KS_Solvers/libks_solvers.a \
+       ../../FFTXlib/libqefft.a ../../LAXlib/libqela.a ../../UtilXlib/libutil.a ../../dft-d3/libdftd3qe.a
 
-TLDEPS=bindir mods libs liblapack libblas
+TLDEPS= bindir libs mods libks_solvers dftd3
 
-LIBOBJS	= ../../flib/ptools.a ../../flib/flib.a ../../clib/clib.a ../../iotk/src/libiotk.a
-
-all : tldeps pw.x manypw.x generate_vdW_kernel_table.x generate_rVV10_kernel_table.x
+all : tldeps pw.x generate_vdW_kernel_table.x generate_rVV10_kernel_table.x
 
 pw.x : $(PWOBJS) libpw.a $(LIBOBJS) $(QEMODS)
 	$(LD) $(LDFLAGS) -o $@ \
-	   $(PWOBJS) libpw.a $(QEMODS) $(LIBOBJS) $(LIBS)
-	- ( cd ../../bin; ln -fs ../PW/src/$@ . )
-
-manypw.x : $(MANYPWOBJS) libpw.a $(LIBOBJS) $(QEMODS)
-	$(LD) $(LDFLAGS) -o $@ \
-	 $(MANYPWOBJS) libpw.a $(QEMODS) $(LIBOBJS) $(LIBS)
-	- ( cd ../../bin; ln -fs ../PW/src/$@ . )
+	   $(PWOBJS) libpw.a $(QEMODS) $(LIBOBJS) $(QELIBS)
+	- ( cd ../../bin; ln -fs ../PW/src/$@ . ; \
+               ln -fs ../PW/src/$@ dist.x ; ln -fs ../PW/src/$@ manypw.x ; )
+# dist.x and manypw.x link the same executable pw.x
 
 libpw.a : $(PWLIBS) 
 	$(AR) $(ARFLAGS) $@ $?
@@ -279,16 +274,16 @@ tldeps :
 	( cd ../.. ; $(MAKE) $(TLDEPS) || exit 1 ) ; fi
 
 clean :
-	- /bin/rm -f *.x *.o *.a *~ *.F90 *.d *.mod *.i *.L
+	- /bin/rm -f *.x *.o *.a *~ *_tmp.f90 *.d *.mod *.i *.L
 
 generate_vdW_kernel_table.x : libpw.a generate_vdW_kernel_table.o
 	$(LD) $(LDFLAGS) -o $@ \
-		generate_vdW_kernel_table.o $(QEMODS) libpw.a $(LIBOBJS) $(LIBS)
+		generate_vdW_kernel_table.o $(QEMODS) libpw.a $(LIBOBJS) $(QELIBS)
 	- ( cd ../../bin; ln -fs ../PW/src/$@ . )
 
 generate_rVV10_kernel_table.x : libpw.a generate_rVV10_kernel_table.o
 	$(LD) $(LDFLAGS) -o $@ \
-		generate_rVV10_kernel_table.o $(QEMODS) libpw.a $(LIBOBJS) $(LIBS)
+		generate_rVV10_kernel_table.o $(QEMODS) libpw.a $(LIBOBJS) $(QELIBS)
 	- ( cd ../../bin; ln -fs ../PW/src/$@ . )
 
 

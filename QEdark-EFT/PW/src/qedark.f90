@@ -70,12 +70,12 @@ SUBROUTINE qedark()
   ! Main driver of QEdark code.
   !
   !
-  USE wavefunctions_module,           ONLY: evc                  ! For collinear, evc(npwx, nbnd) [look at allocate_wfc.f90]
+  USE wavefunctions,           ONLY: evc                  ! For collinear, evc(npwx, nbnd) [look at allocate_wfc.f90]
   USE kinds,                          ONLY: DP
-  USE wvfct,                          ONLY: igk, nbnd, npwx, et,g2kin  !, btype
+  USE wvfct,                          ONLY: nbnd, npwx, et,g2kin  !, btype
   USE klist,                          ONLY: nks, nkstot, ngk, wk, xk, nelec
   USE lsda_mod,                       ONLY: nspin
-  USE io_files,                       ONLY: nwordwfc, iunwfc, iunigk
+  USE io_files,                       ONLY: nwordwfc, iunwfc
   USE buffers,                        ONLY: get_buffer
   USE gvect,                          ONLY: g
   USE cell_base,                      ONLY: bg, tpiba, tpiba2, omega
@@ -110,6 +110,8 @@ SUBROUTINE qedark()
   REAL(DP) :: er_binsize                                          ! Bin size (Ry) for linear bins with user-provided size 
   
   INTEGER :: num_q_bins
+  INTEGER :: num_of_nodes
+  INTEGER :: node
   REAL(DP) :: deltaq
 
   INTEGER :: nksf                                                 ! Number of k-points in formfactor calculation.
@@ -153,7 +155,7 @@ SUBROUTINE qedark()
      vearth_SI, vesc_SI, v0_SI, deltav_SI, &
      num_mx, mx_NU, &
      Er_bin_type, num_er_bins, ermax_NU, er_binsize, &
-     num_q_bins, deltaq, &
+     num_q_bins, num_of_nodes, node, deltaq, &
      scissor_correction, scissorgap)
 
 
@@ -167,7 +169,7 @@ SUBROUTINE qedark()
           nksf, nbndval, nbndcond, &
           vearth_SI, vesc_SI, v0_SI, deltav_SI, &
           Er_bin_type, num_er_bins, ermax_NU, er_binsize, &
-          num_q_bins, deltaq, &
+          num_q_bins, num_of_nodes, node, deltaq, &
           scissor_correction, scissorgap)
 
   ELSEIF (calculation_mode == "f2_3d") THEN

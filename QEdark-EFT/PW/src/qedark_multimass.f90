@@ -20,12 +20,12 @@ SUBROUTINE qedark_multimass(restartmode, &
   ! constant) squared weighted by the eta function for multiple DM masses. 
   !
   !
-  USE wavefunctions_module,           ONLY: evc    ! For collinear, evc(npwx, nbnd) [look at allocate_wfc.f90]
+  USE wavefunctions,           ONLY: evc    ! For collinear, evc(npwx, nbnd) [look at allocate_wfc.f90]
   USE kinds,                          ONLY: DP
-  USE wvfct,                          ONLY: igk, nbnd, npwx, et, g2kin  !, btype
+  USE wvfct,                          ONLY: nbnd, npwx, et, g2kin  !, btype
   USE klist,                          ONLY: nks, ngk, wk, xk, nelec
   USE lsda_mod,                       ONLY: nspin
-  USE io_files,                       ONLY: nwordwfc, iunwfc, iunigk
+  USE io_files,                       ONLY: nwordwfc, iunwfc
   USE buffers,                        ONLY: get_buffer
   USE gvect,                          ONLY: g
   USE cell_base,                      ONLY: bg, tpiba, tpiba2, omega

@@ -12,7 +12,7 @@ SUBROUTINE qedark_read_input(&
      vearth_SI, vesc_SI, v0_SI, deltav_SI, &
      num_mx, mx_NU, & 
      er_bin_type, num_er_bins, ermax_NU, er_binsize, &
-     num_q_bins, deltaq, &
+     num_q_bins, num_of_nodes, node, deltaq, &
      scissor_correction, scissorgap)
   
   USE kinds,                       ONLY: DP
@@ -26,6 +26,7 @@ SUBROUTINE qedark_read_input(&
 
   CHARACTER(len=20) :: calculation_mode
   LOGICAL, INTENT(OUT) :: restart
+
   INTEGER, INTENT(OUT) :: nksf           ! Number of k-points in the formfactor calculation. Takes the first nksf of all nks k-points.
   INTEGER, INTENT(OUT) :: nbndval
   INTEGER, INTENT(OUT) :: nbndcond
@@ -47,6 +48,8 @@ SUBROUTINE qedark_read_input(&
   REAL(DP), INTENT(OUT) :: er_binsize 
 
   INTEGER, INTENT(OUT) :: num_q_bins
+  INTEGER, INTENT(OUT) :: num_of_nodes
+  INTEGER, INTENT(OUT) :: node
   REAL(DP), INTENT(OUT) :: deltaq
 
   LOGICAL, INTENT(OUT)  :: scissor_correction 
@@ -61,7 +64,7 @@ SUBROUTINE qedark_read_input(&
        vearth_SI, vesc_SI, v0_SI, deltav_SI, &
        num_mx, mx_NU, &
        er_bin_type, num_er_bins, ermax_NU, er_binsize, &
-       num_q_bins, deltaq, &
+       num_q_bins, num_of_nodes, node, deltaq, &
        scissor_correction, scissorgap
 
 
@@ -86,6 +89,7 @@ SUBROUTINE qedark_read_input(&
   
   deltav_SI(:) = 0.0_DP
   mx_NU(:) = 0.510998910 ! == electron rest mass
+
   
   num_mx = 0
   
@@ -95,6 +99,9 @@ SUBROUTINE qedark_read_input(&
   er_binsize = 1.0_DP
   
   num_q_bins = 1
+  num_of_nodes = 1
+  node = 1
+  
   deltaq=0.1
   
   scissor_correction = .false.

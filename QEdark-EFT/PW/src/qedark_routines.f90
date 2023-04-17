@@ -16,7 +16,8 @@ SUBROUTINE SaveRestartParams( &
      do_scissor_correction, scissorgap, do_vacuum_level, vacuum_level)
 
   USE kinds,                         ONLY: DP  
-  USE wvfct,                         ONLY: ecutwfc, nbnd
+  USE wvfct,                         ONLY: nbnd
+  USE gvecw,                         ONLY: ecutwfc
   USE klist,                         ONLY: nks
   
   IMPLICIT NONE
@@ -45,7 +46,8 @@ END SUBROUTINE SaveRestartParams
 SUBROUTINE SaveRestartData(ik1, ik2, num_er_bins, nmonths, ctot, cbinned)
 
   USE kinds,                         ONLY: DP  
-  USE wvfct,                         ONLY: ecutwfc, nbnd
+  USE wvfct,                         ONLY: nbnd
+  USE gvecw,                         ONLY: ecutwfc
   USE klist,                         ONLY: nks
   
   IMPLICIT NONE
@@ -82,7 +84,8 @@ SUBROUTINE ReadRestart(num_er_bins, nmonths, &
      ik1init, ik2init, ctot, cbinned)
 
   USE kinds,                         ONLY: DP  
-  USE wvfct,                         ONLY: ecutwfc, nbnd
+  USE wvfct,                         ONLY: nbnd
+  USE gvecw,                         ONLY: ecutwfc
   USE klist,                         ONLY: nks
    
   IMPLICIT NONE
@@ -655,9 +658,7 @@ SUBROUTINE all_igk(numk, numpw, alligk)
   ! for a given k-point.
   !
 
-  USE wvfct,                          ONLY: igk 
-  USE io_files,                       ONLY: iunigk
-  
+  USE klist,                          ONLY : ngk, igk_k
   IMPLICIT NONE
   INTEGER, INTENT(IN) :: numk, numpw               ! Number of k-points and number of plane waves (==num of G-vectors)
   INTEGER, INTENT(OUT) :: alligk(numpw, numk)       ! List containing all igk(:)
@@ -665,10 +666,8 @@ SUBROUTINE all_igk(numk, numpw, alligk)
   INTEGER :: ik
   
   IF ( numk > 1 ) THEN
-     REWIND( iunigk )
      DO ik=1, numk
-        READ( iunigk ) igk
-        alligk(:, ik) = igk(:)
+        alligk(:, ik) = igk_k(:,ik)
      ENDDO
   ENDIF
 
@@ -1004,10 +1003,10 @@ SUBROUTINE check_wf_normalization()
 
 USE kinds,                          ONLY: DP
 USE electrons_base,                 ONLY: nelt
-USE wavefunctions_module,           ONLY: evc
-USE wvfct,                          ONLY: igk, nbnd 
+USE wavefunctions,           ONLY: evc
+USE wvfct,                          ONLY: nbnd 
 USE klist,                          ONLY: nks, ngk, wk
-USE io_files,                       ONLY: nwordwfc, iunwfc, iunigk
+USE io_files,                       ONLY: nwordwfc, iunwfc
 USE buffers,                        ONLY: get_buffer
 
 
@@ -1320,6 +1319,10 @@ SUBROUTINE create_bins(bintype, min, max, numbins, binsize, binedges)
      CALL linear_bins(min, maxaux, numbins, binedges)
   CASE (3)
      CALL exponential_bins(min, max, numbins, binedges)
+  CASE (4)
+     CALL exponential_bins_negative(min, max, numbins, binedges)
+  CASE (5)
+     CALL sqrt_bins_mineqmax(min, max, numbins, binedges)
   CASE default
      WRITE(*,*), "ERROR: wrong bin type selected. Creating linear bins."
      CALL linear_bins(min, max, numbins, binedges)
@@ -1355,7 +1358,83 @@ subroutine exponential_bins(min, max, nbins, binedge)
   
 end subroutine exponential_bins
 
+subroutine exponential_bins_negative(min, max, nbins, binedge)
+!This bin sampling allows for sampling bins more densely close to 0
+!It also allows for negative bin edge value.
+  USE kinds,                         ONLY: DP
 
+
+ implicit none
+
+  REAL(DP), INTENT(IN) :: min, max
+  INTEGER, INTENT(IN) :: nbins
+  REAL(DP), INTENT(OUT) :: binedge(nbins+1)
+
+  REAL(DP) :: x, y, deltax, nlog
+  INTEGER :: i
+  INTEGER :: n
+  nlog=10.0_DP
+
+  deltax = (max-min)/float(nbins)
+  binedge(1) = min
+  binedge(nbins+1) = max
+  IF (max==-1*min) THEN
+     n=FLOOR(nbins/2.0_DP)
+  ELSE
+     n=nbins
+  ENDIF
+
+  DO i=1, n
+     x = min + float(i)*deltax
+     y = nlog**(DABS(x)/max)
+     binedge(i+1)=binedge(i)+y*deltax*DLOG(nlog)/(nlog-1.0_DP)
+     IF (max==-1*min) THEN
+     binedge(nbins+1-i)=-1*binedge(i+1)
+     ENDIF
+  ENDDO
+  IF (n==nbins/2.0_DP) THEN
+     binedge(n+1)=0
+  ENDIF
+
+
+end subroutine exponential_bins_negative
+
+
+subroutine sqrt_bins_mineqmax(min, max, nbins, binedge)
+!This bin sampling allows for sampling bins more densely close to 0
+!It also allows for negative bin edge value.
+  USE kinds,                         ONLY: DP
+
+
+ implicit none
+
+  REAL(DP), INTENT(IN) :: min, max
+  INTEGER, INTENT(IN) :: nbins
+  REAL(DP), INTENT(OUT) :: binedge(nbins+1)
+
+  REAL(DP) :: x, y, deltax, nlog
+  INTEGER :: i
+  INTEGER :: n
+  nlog=10.0_DP
+
+  IF (max==-1*min) THEN
+     n=FLOOR(nbins/2.0_DP)
+  ELSE
+     WRITE(*,*), "ERROR: abs(min)!=max."
+  ENDIF
+  x=1.0_DP
+  DO i=1, n
+     deltax=DSQRT(x)
+     binedge(n+1+i)=x
+     binedge(n+1-i)=-x
+     x=x+deltax
+  ENDDO
+  IF (n==nbins/2.0_DP) THEN
+     binedge(n+1)=0
+  ENDIF
+  binedge(:)=binedge(:)*max/binedge(nbins+1)
+
+end subroutine sqrt_bins_mineqmax
 
 subroutine linear_bins(min, max, nbins, binedge)
     
@@ -1546,11 +1625,10 @@ SUBROUTINE qspace(bzvol, print2file)
   ! Calculates qspace information.
   !
   USE kinds,                         ONLY: DP
-  USE klist,                         ONLY: nks, ngk, wk, xk
+  USE klist,                         ONLY: nks, ngk, wk, xk, igk_k
   USE gvect,                         ONLY: g
   USE cell_base,                     ONLY: tpiba, bg
-  USE wvfct,                         ONLY: igk, ecutwfc
-  USE io_files,                      ONLY: iunigk
+  USE gvecw,                         ONLY: ecutwfc
 
 
   IMPLICIT NONE
@@ -1612,7 +1690,6 @@ SUBROUTINE qspace(bzvol, print2file)
   ENDIF
 
   
-  REWIND( iunigk )
   qvol=0.0_DP
   DO ik=1, nks
      DO ig=1, ngk(ik)
@@ -1621,8 +1698,8 @@ SUBROUTINE qspace(bzvol, print2file)
         qvol = qvol + 0.5 * wk(ik) * bzvol
         
         ! q vector in cartesian coordinates
-        IF (igk(ig) == 0) CYCLE
-        q(:) = xk(:,ik) + g(:,igk(ig))
+        IF (igk_k(ig,ik) == 0) CYCLE
+        q(:) = xk(:,ik) + g(:,igk_k(ig,ik))
         qnorm = tpiba * SQRT(SUM(q(:)**2))
         
         IF (qnorm**2 > ecutwfc) CYCLE
