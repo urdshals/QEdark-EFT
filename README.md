@@ -2,6 +2,7 @@
 v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![arXiv](https://img.shields.io/badge/arXiv-2303.15497-B31B1B.svg)](https://arxiv.org/abs/2303.15497)
 [![arXiv](https://img.shields.io/badge/arXiv-2303.15509-B31B1B.svg)](https://arxiv.org/abs/2303.15509)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7836577.svg)](https://doi.org/10.5281/zenodo.7836577)
 
 
 # QEdark-EFT for graphene with Monte Carlo Integrator
@@ -58,6 +59,7 @@ The included folders are:
 
 If you decide to use this code, please cite the latest archived version and the papers.
 
+> Urdshals, E, & Matas, M. (2023). QEdark-EFT-Graphene (0.1.0). [[Zenodo.7836577]](https://doi.org/10.5281/zenodo.7836577)
 
 > Catena, R., Emken, T., Matas, M, Spaldin, N.A., Urdshals, E. , 2023,  **Direct searches for general dark matter-electron interactions with graphene detectors: Part I. Electronic structure calculations**, [[arXiv:2303.15497]](https://arxiv.org/abs/2303.15497).
   
