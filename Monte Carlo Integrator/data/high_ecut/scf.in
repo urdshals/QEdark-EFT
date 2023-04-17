@@ -1,0 +1,32 @@
+&control
+    calculation= 'scf'
+    restart_mode= 'restart'
+    prefix='qe'
+    pseudo_dir= '../pseudopotentials/'
+    outdir= './'
+    max_seconds=600000
+ /
+&SYSTEM
+    ibrav = 0, celldm(1) = 4.661625
+    nat = 2, ntyp = 1,
+    ecutwfc = 2000.0 ,
+    nbnd= 40 ,
+    ecutrho = 16000.0 ,
+    nosym= .true.
+    noinv=.true.
+/
+&ELECTRONS
+    mixing_beta = 0.3,
+/
+ATOMIC_SPECIES
+C 12.0107 C.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS alat
+   1.000000000   0.000000000   0.000000000
+  -0.500000000   0.866025403   0.000000000
+   0.000000000   0.000000000   10.00000000
+ATOMIC_POSITIONS crystal
+C 0.000000000 0.000000000 0.000000000
+C 0.333333333 0.666666667 0.000000000
+K_POINTS automatic
+16 16 1 0 0 0
+
