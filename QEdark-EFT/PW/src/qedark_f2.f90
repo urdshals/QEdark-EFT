@@ -221,7 +221,7 @@ SUBROUTINE qedark_f2( restartmode, &
 !Loops to find minimum and maximum valence band energy needed for the binning
   Erange(:)=et(ivalbottom,1)
     DO iband1=ivalbottom, ivaltop
-       DO ik1=ik1init, nksf
+       DO ik1=1, nksf
           IF (et(iband1,ik1)<Erange(1)) THEN
              Erange(1)=et(iband1,ik1)
           ENDIF
